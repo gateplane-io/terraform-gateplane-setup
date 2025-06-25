@@ -35,3 +35,19 @@ resource "vault_plugin" "policy_gate" {
   env = [
   ]
 }
+
+resource "vault_plugin" "okta_group_gate" {
+  count = var.okta_group_gate_plugin.filename != null ? 1 : 0
+
+  type = "auth"
+  /*
+    Name is used to identify the mount type by the UI
+    so it must be hardcoded
+  */
+  name    = "gateplane-okta-group-gate"
+  command = var.okta_group_gate_plugin.filename
+  version = var.okta_group_gate_plugin.version
+  sha256  = var.okta_group_gate_plugin.sha256
+  env = [
+  ]
+}

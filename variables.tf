@@ -42,6 +42,21 @@ variable "policy_gate_plugin" {
   }
 }
 
+
+variable "okta_group_gate_plugin" {
+  description = "Filename, version and SHA256 HexDigest of the GatePlane Okta Group Gate plugin."
+  type = object({
+    filename = string
+    sha256   = string
+    version  = string
+  })
+  default = {
+    filename = null
+    sha256   = null
+    version  = null
+  }
+}
+
 variable "plugin_directory" {
   description = "The directory where Vault/OpenBao plugins are stored."
   default     = "/usr/local/libexec/vault/"
