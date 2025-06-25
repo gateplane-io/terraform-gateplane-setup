@@ -27,6 +27,7 @@ No requirements.
 | [vault_generic_endpoint.content_security_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_generic_endpoint.cross_origin_requests](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_plugin.mock](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
+| [vault_plugin.okta_group_gate](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
 | [vault_plugin.policy_gate](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
 
 ## Inputs
@@ -35,6 +36,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | <a name="input_domains"></a> [domains](#input\_domains) | Domains to be allowed CORS and HTML iFrame access, by the Vault/OpenBao instance UI. | `list` | <pre>[<br/>  "https://app.gateplane.io"<br/>]</pre> | no |
 | <a name="input_mock_plugin"></a> [mock\_plugin](#input\_mock\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Mock plugin (only used for testing). | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
+| <a name="input_okta_group_gate_plugin"></a> [okta\_group\_gate\_plugin](#input\_okta\_group\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Okta Group Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
 | <a name="input_plugin_directory"></a> [plugin\_directory](#input\_plugin\_directory) | The directory where Vault/OpenBao plugins are stored. | `string` | `"/usr/local/libexec/vault/"` | no |
 | <a name="input_policy_gate_plugin"></a> [policy\_gate\_plugin](#input\_policy\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Policy Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
 
