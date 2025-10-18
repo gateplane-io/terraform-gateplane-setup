@@ -61,3 +61,8 @@ variable "plugin_directory" {
   description = "The directory where Vault/OpenBao plugins are stored."
   default     = "/usr/local/libexec/vault/"
 }
+
+variable "create_ui_policy" {
+  description = "A Vault/OpenBao Policy that can be used to allow usage of the GatePlane UI ([`app.gateplane.io`](https://app.gateplane.io))"
+  default     = true
+}

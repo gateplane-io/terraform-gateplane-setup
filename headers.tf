@@ -8,13 +8,22 @@
 # Use, modification, and redistribution permitted under the terms of the license,
 # except for providing this software as a commercial service or product.
 
+# resource "vault_generic_endpoint" "cross_origin_requests_read" {
+#   path = "sys/config/cors"
+
+#   disable_read = false
+#   data_json = "{}"
+#   # write_fields = ["allowed_origins"]
+# }
+
 // Allow CORS for the UI
 resource "vault_generic_endpoint" "cross_origin_requests" {
   path = "sys/config/cors"
 
   data_json = jsonencode({
-    enabled         = true
-    allowed_origins = var.domains
+    enabled = true
+    # Include the existing CORS domains - do not overwrite with var.domains
+    allowed_origins = flatten([var.domains])
     allowed_headers = [
       "Content-Type",
       "X-Requested-With",
@@ -40,6 +49,15 @@ resource "vault_generic_endpoint" "cross_origin_requests" {
     ]
   })
 }
+
+resource "vault_generic_endpoint" "cache_cors_headers" {
+  path = "/sys/config/ui/headers/Access-Control-Max-Age"
+
+  data_json = jsonencode({
+    values = [86400]
+  })
+}
+
 
 // Allow iFrame inclusion to the UI for transparent OIDC authentication
 resource "vault_generic_endpoint" "content_security_policy" {

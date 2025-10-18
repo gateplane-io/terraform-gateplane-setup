@@ -13,5 +13,11 @@ output "enabled_plugins" {
   value = compact([
     var.mock_plugin.filename != null ? "mock" : "",
     var.policy_gate_plugin.filename != null ? "policy-gate" : "",
+    var.okta_group_gate_plugin.filename != null ? "okta-group-gate" : "",
   ])
+}
+
+output "ui_policy" {
+  description = "The name of the Vault/OpenBao Policy used to grant access to GatePlane UI."
+  value       = var.create_ui_policy ? vault_policy.ui[0].name : null
 }
