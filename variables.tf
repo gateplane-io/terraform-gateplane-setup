@@ -8,9 +8,9 @@
 # Use, modification, and redistribution permitted under the terms of the license,
 # except for providing this software as a commercial service or product.
 
-variable "domains" {
-  description = "Domains to be allowed CORS and HTML iFrame access, by the Vault/OpenBao instance UI."
-  default     = ["https://app.gateplane.io"]
+variable "url_origins" {
+  description = "URLs to be allowed CORS and HTML iFrame access by the Vault/OpenBao instance."
+  default     = []
 }
 
 # Mock Plugin for Testing

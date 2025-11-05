@@ -18,12 +18,14 @@
 
 // Allow CORS for the UI
 resource "vault_generic_endpoint" "cross_origin_requests" {
+  count = length(var.url_origins) == 0 ? 0 : 1
+
   path = "sys/config/cors"
 
   data_json = jsonencode({
     enabled = true
     # Include the existing CORS domains - do not overwrite with var.domains
-    allowed_origins = flatten([var.domains])
+    allowed_origins = flatten([var.url_origins])
     allowed_headers = [
       "Content-Type",
       "X-Requested-With",
@@ -65,7 +67,7 @@ resource "vault_generic_endpoint" "content_security_policy" {
 
   data_json = jsonencode({
     values = join("; ", [
-      "frame-ancestors 'self' ${join(" ", var.domains)}",
+      "frame-ancestors 'self' ${join(" ", var.url_origins)}",
       # "frame-ancestors 'self' *", // star works here too
       # "frame-src ${join(" ", var.domains)}"
     ])
