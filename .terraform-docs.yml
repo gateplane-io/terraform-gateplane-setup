@@ -15,7 +15,7 @@ output:
 content: |-
   # Vault/OpenBao setup for GatePlane
   ![License: ElasticV2](https://img.shields.io/badge/ElasticV2-green?style=flat-square&label=license&cacheSeconds=3600&link=https%3A%2F%2Fwww.elastic.co%2Flicensing%2Felastic-license)
-  [![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-844FBA?logo=terraform&logoColor=fff)](https://registry.terraform.io/modules/gateplane-io/setup/gateplane/latest)
+  ![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-844FBA?logo=terraform&logoColor=fff)](https://registry.terraform.io/modules/gateplane-io/setup/gateplane/latest)
 
   This Terraform module enables a Vault/OpenBao instance to use GatePlane.
 
@@ -23,7 +23,7 @@ content: |-
   This is a requirement for using `gateplane-io/terraform-gateplane-policy-gate` and the rest of the gates.
 
 
-  * It can enables [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
+  * It can enable [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
   and [Content Security Policy (CSP) for IFrames](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)
   to allow browser access from additional origins, such as [`https://app.gateplane.io`](https://app.gateplane.io) (domain can be changed).
 
