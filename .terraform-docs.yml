@@ -18,11 +18,11 @@ content: |-
 
   This Terraform module enables a Vault/OpenBao instance to use GatePlane.
 
-  * It enables [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
-  and [Content Security Policy (CSP) for IFrames](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)
-  to allow browser access from [`https://app.gateplane.io`](https://app.gateplane.io) (domain can be changed).
-
   * It can register all GatePlane plugins to the Vault/OpenBao instance, so they can be recognised by the UI.
+
+  * It can enables [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
+  and [Content Security Policy (CSP) for IFrames](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)
+  to allow browser access from additional origins, such as [`https://app.gateplane.io`](https://app.gateplane.io) (domain can be changed).
 
 
   {{ .Requirements }}
