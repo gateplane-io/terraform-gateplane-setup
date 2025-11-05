@@ -11,7 +11,7 @@
 resource "vault_plugin" "mock" {
   count = var.mock_plugin.filename != null ? 1 : 0
 
-  type    = "auth"
+  type    = "secret"
   name    = "gateplane-mock"
   command = var.mock_plugin.filename
   version = var.mock_plugin.version
@@ -23,7 +23,7 @@ resource "vault_plugin" "mock" {
 resource "vault_plugin" "policy_gate" {
   count = var.policy_gate_plugin.filename != null ? 1 : 0
 
-  type = "auth"
+  type = "secret"
   /*
     Name is used to identify the mount type by the UI
     so it must be hardcoded
@@ -39,7 +39,7 @@ resource "vault_plugin" "policy_gate" {
 resource "vault_plugin" "okta_group_gate" {
   count = var.okta_group_gate_plugin.filename != null ? 1 : 0
 
-  type = "auth"
+  type = "secret"
   /*
     Name is used to identify the mount type by the UI
     so it must be hardcoded
