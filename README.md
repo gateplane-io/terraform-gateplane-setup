@@ -1,13 +1,16 @@
 # Vault/OpenBao setup for GatePlane
 ![License: ElasticV2](https://img.shields.io/badge/ElasticV2-green?style=flat-square&label=license&cacheSeconds=3600&link=https%3A%2F%2Fwww.elastic.co%2Flicensing%2Felastic-license)
+[![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-844FBA?logo=terraform&logoColor=fff)](https://registry.terraform.io/modules/gateplane-io/setup/gateplane/latest)
 
 This Terraform module enables a Vault/OpenBao instance to use GatePlane.
 
-* It enables [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
-and [Content Security Policy (CSP) for IFrames](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)
-to allow browser access from [`https://app.gateplane.io`](https://app.gateplane.io) (domain can be changed).
+* It can register all GatePlane plugins to the Vault/OpenBao instance's Plugin Catalog.
+This is a requirement for using `gateplane-io/terraform-gateplane-policy-gate` and the rest of the gates.
 
-* It can register all GatePlane plugins to the Vault/OpenBao instance, so they can be recognised by the UI.
+
+* It can enables [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS)
+and [Content Security Policy (CSP) for IFrames](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)
+to allow browser access from additional origins, such as [`https://app.gateplane.io`](https://app.gateplane.io) (domain can be changed).
 
 
 ## Requirements
@@ -37,11 +40,10 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_create_ui_policy"></a> [create\_ui\_policy](#input\_create\_ui\_policy) | A Vault/OpenBao Policy that can be used to allow usage of the GatePlane UI ([`app.gateplane.io`](https://app.gateplane.io)) | `bool` | `true` | no |
-| <a name="input_domains"></a> [domains](#input\_domains) | Domains to be allowed CORS and HTML iFrame access, by the Vault/OpenBao instance UI. | `list` | <pre>[<br/>  "https://app.gateplane.io"<br/>]</pre> | no |
 | <a name="input_mock_plugin"></a> [mock\_plugin](#input\_mock\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Mock plugin (only used for testing). | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
 | <a name="input_okta_group_gate_plugin"></a> [okta\_group\_gate\_plugin](#input\_okta\_group\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Okta Group Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
-| <a name="input_plugin_directory"></a> [plugin\_directory](#input\_plugin\_directory) | The directory where Vault/OpenBao plugins are stored. | `string` | `"/usr/local/libexec/vault/"` | no |
 | <a name="input_policy_gate_plugin"></a> [policy\_gate\_plugin](#input\_policy\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Policy Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
+| <a name="input_url_origins"></a> [url\_origins](#input\_url\_origins) | URLs to be allowed CORS and HTML iFrame access by the Vault/OpenBao instance. | `list` | `[]` | no |
 
 ## Outputs
 
