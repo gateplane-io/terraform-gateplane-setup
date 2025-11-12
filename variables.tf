@@ -31,14 +31,16 @@ variable "mock_plugin" {
 variable "policy_gate_plugin" {
   description = "Filename, version and SHA256 HexDigest of the GatePlane Policy Gate plugin."
   type = object({
-    filename = string
-    sha256   = string
-    version  = string
+    filename       = string
+    sha256         = string
+    version        = string
+    approle_policy = string
   })
   default = {
-    filename = null
-    sha256   = null
-    version  = null
+    filename       = null
+    sha256         = null
+    version        = null
+    approle_policy = "gateplane-policy-gate-policy"
   }
 }
 
@@ -60,4 +62,9 @@ variable "okta_group_gate_plugin" {
 variable "create_ui_policy" {
   description = "A Vault/OpenBao Policy that can be used to allow usage of the GatePlane UI ([`app.gateplane.io`](https://app.gateplane.io))"
   default     = true
+}
+
+variable "approle_mount" {
+  description = "The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against."
+  default     = "gateplane/approle"
 }

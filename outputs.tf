@@ -21,3 +21,8 @@ output "ui_policy" {
   description = "The name of the Vault/OpenBao Policy used to grant access to GatePlane UI."
   value       = var.create_ui_policy ? vault_policy.ui[0].name : null
 }
+
+output "approle_mount" {
+  description = "The path where the dedicated GatePlane AppRole Auth Method is mounted (used by Policy Gate plugin)"
+  value       = length(vault_auth_backend.approle) > 0 ? vault_auth_backend.approle[0].path : null
+}
