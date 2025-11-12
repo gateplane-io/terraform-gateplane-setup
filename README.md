@@ -1,6 +1,6 @@
 # Vault/OpenBao setup for GatePlane
 ![License: ElasticV2](https://img.shields.io/badge/ElasticV2-green?style=flat-square&label=license&cacheSeconds=3600&link=https%3A%2F%2Fwww.elastic.co%2Flicensing%2Felastic-license)
-![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-844FBA?logo=terraform&logoColor=fff)](https://registry.terraform.io/modules/gateplane-io/setup/gateplane/latest)
+[![Terraform Registry](https://img.shields.io/badge/Terraform-Registry-844FBA?style=flat-square&logo=terraform&logoColor=fff)](https://registry.terraform.io/modules/gateplane-io/setup/gateplane/latest)
 
 This Terraform module enables a Vault/OpenBao instance to use GatePlane.
 
@@ -21,34 +21,38 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_vault"></a> [vault](#provider\_vault) | n/a |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | 5.4.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [vault_auth_backend.approle](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/auth_backend) | resource |
 | [vault_generic_endpoint.cache_cors_headers](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_generic_endpoint.content_security_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_generic_endpoint.cross_origin_requests](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/generic_endpoint) | resource |
 | [vault_plugin.mock](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
 | [vault_plugin.okta_group_gate](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
 | [vault_plugin.policy_gate](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/plugin) | resource |
+| [vault_policy.policy_gate_policy](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
 | [vault_policy.ui](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/resources/policy) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_approle_mount"></a> [approle\_mount](#input\_approle\_mount) | The Vault/OpenBao AppRole Auth Method mount that the plugin will authenticate against. | `string` | `"gateplane/approle"` | no |
 | <a name="input_create_ui_policy"></a> [create\_ui\_policy](#input\_create\_ui\_policy) | A Vault/OpenBao Policy that can be used to allow usage of the GatePlane UI ([`app.gateplane.io`](https://app.gateplane.io)) | `bool` | `true` | no |
 | <a name="input_mock_plugin"></a> [mock\_plugin](#input\_mock\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Mock plugin (only used for testing). | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
 | <a name="input_okta_group_gate_plugin"></a> [okta\_group\_gate\_plugin](#input\_okta\_group\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Okta Group Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
-| <a name="input_policy_gate_plugin"></a> [policy\_gate\_plugin](#input\_policy\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Policy Gate plugin. | <pre>object({<br/>    filename = string<br/>    sha256   = string<br/>    version  = string<br/>  })</pre> | <pre>{<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
+| <a name="input_policy_gate_plugin"></a> [policy\_gate\_plugin](#input\_policy\_gate\_plugin) | Filename, version and SHA256 HexDigest of the GatePlane Policy Gate plugin. | <pre>object({<br/>    filename       = string<br/>    sha256         = string<br/>    version        = string<br/>    approle_policy = string<br/>  })</pre> | <pre>{<br/>  "approle_policy": "gateplane-policy-gate-policy",<br/>  "filename": null,<br/>  "sha256": null,<br/>  "version": null<br/>}</pre> | no |
 | <a name="input_url_origins"></a> [url\_origins](#input\_url\_origins) | URLs to be allowed CORS and HTML iFrame access by the Vault/OpenBao instance. | `list` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_approle_mount"></a> [approle\_mount](#output\_approle\_mount) | The path where the dedicated GatePlane AppRole Auth Method is mounted (used by Policy Gate plugin) |
 | <a name="output_enabled_plugins"></a> [enabled\_plugins](#output\_enabled\_plugins) | The GatePlane Plugins registered in the Vault/OpenBao instance. |
 | <a name="output_ui_policy"></a> [ui\_policy](#output\_ui\_policy) | The name of the Vault/OpenBao Policy used to grant access to GatePlane UI. |
 
